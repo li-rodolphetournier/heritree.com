@@ -1,83 +1,146 @@
-# 🌳 Généalogie de Famille
+# 🌳 HériTree — Plateforme de gestion généalogique
 
-## 📝 Description
+Application web complète de gestion d'arbres généalogiques avec 
+visualisation ascendante/descendante, gestion des rôles et droits, 
+et conservation d'objets historiques familiaux.
 
-**Généalogie de Famille** est une application web interactive permettant de visualiser, d'explorer et de gérer des arbres généalogiques et des données familiales. Construite avec des technologies modernes, elle offre une expérience fluide, hautement interactive et sécurisée.
+> 🚀 **En production** — 314 déploiements via Vercel CI/CD  
+> 🧪 **84 fichiers de tests (~400 tests)** — Vitest + Playwright
+
+---
 
 ## ✨ Fonctionnalités Principales
 
-- **Authentification Sécurisée** : Système de connexion robuste basé sur Supabase Auth.
-- **Visualisation Avancée** : Affichage d'arbres généalogiques interactifs avec le support de bibliothèques puissantes telles que Nivo, react-d3-tree et VisX.
-- **Mode Sombre / Clair** : Interface utilisateur réactive avec un support complet du mode sombre via TailwindCSS.
-- **Performances & Accessibilité** : Optimisation continue évaluée avec Lighthouse et tests ax-core/pa11y.
+- **Arbres généalogiques interactifs** : Visualisation ascendante/descendante avec Nivo, react-d3-tree et VisX
+- **Authentification sécurisée** : Système de connexion robuste basé sur Supabase Auth (bcrypt, CSRF)
+- **Gestion des rôles et droits** (RBAC) — séparation stricte des accès
+- **Conservation d'objets historiques familiaux** avec galerie
+- **Back-office complet** avec monitoring et tableau de bord
+- **Mode Sombre / Clair** : Support complet via TailwindCSS + Framer Motion
+- **Performances & Accessibilité** : Optimisation Lighthouse, tests ax-core/pa11y
+- Optimisation SEO (metadata, sitemap, structured data)
 
-## 🛠️ Technologies Utilisées
+---
 
-- **Framework** : [Next.js 16](https://nextjs.org/) (App Router & Server Components)
-- **UI & Animations** : [React 19](https://react.dev/), [TailwindCSS 3.4](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/)
-- **Base de données & Backend** : [Supabase](https://supabase.com/) (Auth, Storage, Database)
-- **Visualisation de Données** : [Nivo](https://nivo.rocks/), [react-d3-tree](https://www.npmjs.com/package/react-d3-tree), [VisX](https://airbnb.io/visx/), [Chart.js](https://www.chartjs.org/)
-- **Validation** : [Zod 4](https://zod.dev/)
-- **Tests** : [Vitest](https://vitest.dev/), [Playwright](https://playwright.dev/)
-- **Langage** : TypeScript 5.x
+## 🛠️ Stack Technologique
 
-## 🚀 Démarrage Rapide
+| Catégorie | Technologies |
+|-----------|-------------|
+| **Framework** | Next.js 16 (App Router, SSR/SSG/ISR, Server Components) |
+| **UI & Animations** | React 19, TailwindCSS 3.4, Framer Motion |
+| **Base de données** | Supabase (Auth, Storage, Database) |
+| **Visualisation** | Nivo, react-d3-tree, VisX, Chart.js |
+| **Validation** | Zod 4 |
+| **Tests** | Vitest, Playwright |
+| **Langage** | TypeScript 5.x |
+| **Déploiement** | Vercel (CI/CD automatique) |
 
-Commencez le serveur de développement localement :
-
-```bash
-npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
-# ou
-bun dev
-```
-
-Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
+---
 
 ## 🧪 Tests
 
-Le projet utilise une infrastructure de tests complète pour s'assurer de sa fiabilité.
+Infrastructure de tests complète avec **Vitest** (unitaires/intégration) 
+et **Playwright** (E2E).
 
-### Tests Unitaires & Intégration (Vitest)
+### Tests unitaires / intégration
+
 ```bash
 # Lancer tous les tests en mode watch
 npm test
 
-# Lancer avec l'interface UI interactive
+# Interface UI interactive
 npm run test:ui
 
-# Générer le rapport de couverture
+# Rapport de couverture
 npm run test:coverage
+
+# Mode one-shot (pour CI)
+npm test -- --run
 ```
 
+**Couverture actuelle** :
+- ✅ **84 fichiers de tests (~400 tests)**
+- ✅ Routes API (auth, categories, users, messages, persons, upload, csrf…)
+- ✅ Hooks (auth, thème, généalogie, localStorage, CSRF, debounce…)
+- ✅ Composants (formulaires, carrousels, thèmes, monitoring, modales…)
+- ✅ Services / utilitaires (monitoring, sécurité, logger, Supabase…)
+
 ### Tests E2E (Playwright)
+
 ```bash
 # Lancer tous les tests E2E
 npm run test:e2e
 
-# Lancer Playwright avec l'interface UI 
+# Interface UI Playwright
 npm run test:e2e:ui
+
+# Mode debug
+npm run test:e2e:debug
 ```
 
-> **Note** : La couverture actuelle des tests (plus de 400 tests dans 80+ fichiers) inclut l'authentification sécurisée, les routes API, les hooks personnalisés et la conformité des composants. Pour une analyse complète, consultez le fichier `README_TESTS.md` ou la documentation.
+**Scénarios couverts** :
+- ✅ Authentification
+- ✅ Navigation
+- ✅ Workflows utilisateur complets
 
-## 📚 Documentation et Migration
+---
 
-La source fondamentale de documentation est située dans le dossier [`documentation/`](./documentation/).
+## 🚀 Démarrage Rapide
 
-- 📋 **Plan de Migration Base de Données (Supabase)** : `documentation/PLAN_MIGRATION_SUPABASE.md`
-- 📖 **Guide de Migration Étape par Étape** : `documentation/MIGRATION_GUIDE.md`
-- 🛠️ **Analyses des Technologies** : `documentation/DOCUMENTATION_TECHNOLOGIES.md`
+```bash
+# 1. Cloner le repo
+git clone https://github.com/li-rodolphetournier/heritree.com
 
-## ⚠️ Notes Importantes
+# 2. Installer les dépendances
+npm install
 
-- **Next.js Fonts** : Le projet emploie `next/font` pour optimiser automatiquement le chargement de la famille de police Geist, gérée par Vercel.
-- **ESLint** : À cause d'un bug identifié sur la version Next.js 16.0.7 concernant la hiérarchie `src/app`, la commande `npm run lint` échoue. Privilégiez l'intégration ESLint de votre IDE ou effectuez manuellement un check typographique avec le script `npm run scan-build`. Ceci n'impacte pas le build de production.
+# 3. Configurer les variables d'environnement
+cp .env.example .env.local
+# Renseigner NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-## 🚀 Déploiement
+# 4. Lancer le serveur de développement
+npm run dev
+```
 
-L'application est configurée pour être déposée nativement sur la [plateforme Vercel](https://vercel.com/new).
-Référez-vous à la [documentation de déploiement Next.js](https://nextjs.org/docs/app/building-your-application/deploying) pour plus de détails.
+Ouvrir [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🗄️ Base de données
+
+Le projet utilise **Supabase** (PostgreSQL) avec :
+- Schéma complet : `supabase/schema.sql`
+- Script de migration automatique : `scripts/migrate-to-supabase.ts`
+- Clients serveur et client : `lib/supabase/`
+- Row Level Security (RLS) activé
+
+📋 Guide de migration complet : [MIGRATION_GUIDE.md](./documentation/MIGRATION_GUIDE.md)
+
+---
+
+## 📚 Documentation
+
+Toute la documentation est disponible dans [`documentation/`](./documentation/) :
+
+- [Technologies utilisées](./documentation/DOCUMENTATION_TECHNOLOGIES.md)
+- [Tests complets](./documentation/TESTS_COMPLETS.md)
+- [Plan de migration Supabase](./documentation/PLAN_MIGRATION_SUPABASE.md)
+- [Plan de refactorisation](./documentation/PLAN_REFACTORISATION.md)
+
+---
+
+## 🔒 Sécurité
+
+- Authentification via Supabase Auth
+- Protection CSRF sur toutes les routes sensibles
+- Hashage des mots de passe (bcrypt)
+- Row Level Security (RLS) Supabase
+- Validation des données avec Zod 4
+
+---
+
+## 🌐 Déploiement
+
+Déployé sur **Vercel** avec CI/CD automatique à chaque push sur `main`.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
