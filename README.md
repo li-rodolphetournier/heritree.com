@@ -1,154 +1,83 @@
+# 🌳 Généalogie de Famille
 
-## Getting Started
+## 📝 Description
 
-First, run the development server:
+**Généalogie de Famille** est une application web interactive permettant de visualiser, d'explorer et de gérer des arbres généalogiques et des données familiales. Construite avec des technologies modernes, elle offre une expérience fluide, hautement interactive et sécurisée.
+
+## ✨ Fonctionnalités Principales
+
+- **Authentification Sécurisée** : Système de connexion robuste basé sur Supabase Auth.
+- **Visualisation Avancée** : Affichage d'arbres généalogiques interactifs avec le support de bibliothèques puissantes telles que Nivo, react-d3-tree et VisX.
+- **Mode Sombre / Clair** : Interface utilisateur réactive avec un support complet du mode sombre via TailwindCSS.
+- **Performances & Accessibilité** : Optimisation continue évaluée avec Lighthouse et tests ax-core/pa11y.
+
+## 🛠️ Technologies Utilisées
+
+- **Framework** : [Next.js 16](https://nextjs.org/) (App Router & Server Components)
+- **UI & Animations** : [React 19](https://react.dev/), [TailwindCSS 3.4](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/)
+- **Base de données & Backend** : [Supabase](https://supabase.com/) (Auth, Storage, Database)
+- **Visualisation de Données** : [Nivo](https://nivo.rocks/), [react-d3-tree](https://www.npmjs.com/package/react-d3-tree), [VisX](https://airbnb.io/visx/), [Chart.js](https://www.chartjs.org/)
+- **Validation** : [Zod 4](https://zod.dev/)
+- **Tests** : [Vitest](https://vitest.dev/), [Playwright](https://playwright.dev/)
+- **Langage** : TypeScript 5.x
+
+## 🚀 Démarrage Rapide
+
+Commencez le serveur de développement localement :
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
 
 ## 🧪 Tests
 
-Le projet utilise une infrastructure de tests complète avec **Vitest** pour les tests unitaires/intégration et **Playwright** pour les tests E2E.
+Le projet utilise une infrastructure de tests complète pour s'assurer de sa fiabilité.
 
-### Tests unitaires / intégration
-
+### Tests Unitaires & Intégration (Vitest)
 ```bash
 # Lancer tous les tests en mode watch
 npm test
 
-# Interface UI interactive
+# Lancer avec l'interface UI interactive
 npm run test:ui
 
-# Rapport de couverture
+# Générer le rapport de couverture
 npm run test:coverage
-
-# Mode one-shot (pour CI)
-npm test -- --run
 ```
 
-**Couverture actuelle (Vitest)** :
-- ✅ **84 fichiers de tests** (~400 tests)
-- ✅ Routes API (auth, categories, users, create-user, messages, persons, theme, upload, monitoring, objects, csrf…)
-- ✅ Hooks (auth, thème, généalogie, localStorage, timeout, auto-hide, debounce, CSRF…)
-- ✅ Composants (UI générique, formulaires, carrousels, thèmes, monitoring, modales…)
-- ✅ Services / utilitaires (monitoring, sécurité, Lighthouse/Redis, erreurs, logger, Supabase compat…)
-
-📄 Détails et organisation : `README_TESTS.md` et `ANALYSE_TESTS_MANQUANTS.md`.
-
-### Tests E2E
-
+### Tests E2E (Playwright)
 ```bash
 # Lancer tous les tests E2E
 npm run test:e2e
 
-# Interface UI Playwright
+# Lancer Playwright avec l'interface UI 
 npm run test:e2e:ui
-
-# Mode debug
-npm run test:e2e:debug
 ```
 
-**Tests E2E disponibles** :
-- ✅ Authentification
-- ✅ Navigation
-- ✅ Workflows utilisateur
+> **Note** : La couverture actuelle des tests (plus de 400 tests dans 80+ fichiers) inclut l'authentification sécurisée, les routes API, les hooks personnalisés et la conformité des composants. Pour une analyse complète, consultez le fichier `README_TESTS.md` ou la documentation.
 
-📖 **Documentation complète** : [documentation/TESTS_COMPLETS.md](./documentation/TESTS_COMPLETS.md)
+## 📚 Documentation et Migration
 
----
+La source fondamentale de documentation est située dans le dossier [`documentation/`](./documentation/).
 
-## 📚 Documentation
+- 📋 **Plan de Migration Base de Données (Supabase)** : `documentation/PLAN_MIGRATION_SUPABASE.md`
+- 📖 **Guide de Migration Étape par Étape** : `documentation/MIGRATION_GUIDE.md`
+- 🛠️ **Analyses des Technologies** : `documentation/DOCUMENTATION_TECHNOLOGIES.md`
 
-Toute la documentation du projet est disponible dans le dossier [`documentation/`](./documentation/).
+## ⚠️ Notes Importantes
 
-### Documentation des Technologies
+- **Next.js Fonts** : Le projet emploie `next/font` pour optimiser automatiquement le chargement de la famille de police Geist, gérée par Vercel.
+- **ESLint** : À cause d'un bug identifié sur la version Next.js 16.0.7 concernant la hiérarchie `src/app`, la commande `npm run lint` échoue. Privilégiez l'intégration ESLint de votre IDE ou effectuez manuellement un check typographique avec le script `npm run scan-build`. Ceci n'impacte pas le build de production.
 
-Une documentation complète de toutes les technologies utilisées dans ce projet a été générée via Context7 MCP. Consultez [DOCUMENTATION_TECHNOLOGIES.md](./documentation/DOCUMENTATION_TECHNOLOGIES.md) pour accéder à :
+## 🚀 Déploiement
 
-- Next.js 16 (App Router, Server Components)
-- React 19 (hooks, composants)
-- TypeScript 5
-- TailwindCSS 3.4
-- Supabase (Auth, Storage, Database)
-- Chart.js & React-ChartJS-2
-- bcrypt 6
-
-### Migration vers Supabase
-
-Ce projet peut être migré de fichiers JSON vers Supabase pour une gestion de base de données plus robuste. Tous les fichiers nécessaires pour la migration ont été préparés :
-
-- 📋 **Plan de migration** : [PLAN_MIGRATION_SUPABASE.md](./documentation/PLAN_MIGRATION_SUPABASE.md)
-- 📖 **Guide étape par étape** : [MIGRATION_GUIDE.md](./documentation/MIGRATION_GUIDE.md)
-- 📦 **Fichiers créés** : [README_MIGRATION.md](./documentation/README_MIGRATION.md)
-- 📚 **Index de la documentation** : [documentation/README.md](./documentation/README.md)
-
-### Fichiers inclus pour la migration
-
-- `supabase/schema.sql` - Schéma complet de la base de données
-- `scripts/migrate-to-supabase.ts` - Script de migration automatique
-- `lib/supabase/` - Clients Supabase pour serveur et client
-- `examples/api-routes-supabase.ts` - Exemples de migration des API routes
-
-Pour commencer la migration, consultez le [Guide de migration](./documentation/MIGRATION_GUIDE.md).
-
-### Refactorisation et Best Practices
-
-Un plan complet de refactorisation a été préparé pour améliorer le code selon les meilleures pratiques de Next.js 15 :
-
-- 📋 **Plan de refactorisation** : [PLAN_REFACTORISATION.md](./documentation/PLAN_REFACTORISATION.md)
-
-Ce plan inclut :
-- Unification des routes API vers App Router
-- Migration vers Server Components
-- Implémentation de Server Actions
-- Amélioration de la sécurité et validation
-- Optimisations de performance
-
-## ⚠️ Note sur ESLint
-
-Le linting via `npm run lint` est actuellement désactivé à cause d'un bug connu de Next.js 16.0.7 qui ne trouve pas le répertoire `app` dans la structure `src/app`. 
-
-**Alternatives** :
-- Utilisez le linting intégré de votre IDE (VS Code, WebStorm, etc.)
-- Le build Next.js inclut déjà la vérification TypeScript qui est suffisante
-- Le script `npm run scan-build` vérifie TypeScript et le build
-
-Ce problème n'affecte pas le fonctionnement de l'application ni le build de production.
-
-## 🛠️ Technologies Utilisées
-
-- **Framework** : [Next.js 16](https://nextjs.org/) avec App Router
-- **UI** : [React 19](https://react.dev/), [TailwindCSS 3.4](https://tailwindcss.com/)
-- **Base de données** : [Supabase](https://supabase.com/) (Auth, Storage, Database)
-- **Validation** : [Zod 4](https://zod.dev/)
-- **Tests** : [Vitest](https://vitest.dev/), [Playwright](https://playwright.dev/)
-- **TypeScript** : 5.x
-
-## 📖 Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [React Documentation](https://react.dev/) - learn about React features.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## 🚀 Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+L'application est configurée pour être déposée nativement sur la [plateforme Vercel](https://vercel.com/new).
+Référez-vous à la [documentation de déploiement Next.js](https://nextjs.org/docs/app/building-your-application/deploying) pour plus de détails.
