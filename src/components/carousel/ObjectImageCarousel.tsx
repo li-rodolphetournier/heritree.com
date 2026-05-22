@@ -56,7 +56,7 @@ export function ObjectImageCarousel({ photos, objectName }: ObjectImageCarouselP
       <div className="overflow-hidden rounded-lg shadow-md mb-4" ref={emblaRef}>
         <div className="flex">
           {photos.map((photo, index) => (
-            <div key={index} className="flex-[0_0_100%] min-w-0 relative aspect-square max-h-[600px]">
+            <div key={index} className="flex-[0_0_100%] min-w-0 relative aspect-square">
               <ImageWithFallback
                 src={photo.url}
                 alt={`Photo ${index + 1} de ${objectName} - ${photo.description.join(', ')}`}
