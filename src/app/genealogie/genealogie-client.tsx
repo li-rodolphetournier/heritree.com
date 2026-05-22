@@ -70,7 +70,7 @@ export function GenealogieClient({ initialPersons }: GenealogieClientProps) {
     return () => observer.disconnect();
   }, []);
   
-  const { user } = useAuth({
+  const { user, isLoading: isAuthLoading } = useAuth({
     redirectIfUnauthenticated: true,
     redirectTo: '/',
   });
@@ -84,6 +84,10 @@ export function GenealogieClient({ initialPersons }: GenealogieClientProps) {
 
   useEffect(() => {
     const checkVisibility = async () => {
+      if (isAuthLoading) {
+        return;
+      }
+
       // Les administrateurs ont toujours accès à la vue
       if (isAdmin) {
         setIsAllowed(true);
@@ -109,7 +113,7 @@ export function GenealogieClient({ initialPersons }: GenealogieClientProps) {
     };
 
     checkVisibility();
-  }, [isAdmin]);
+  }, [isAdmin, isAuthLoading]);
   
   // Hooks personnalisés
   const {

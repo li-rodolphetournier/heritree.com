@@ -75,7 +75,7 @@ export function GenealogieTreechartsClient({ initialPersons }: GenealogieTreecha
     return () => observer.disconnect();
   }, []);
   
-  const { user } = useAuth({
+  const { user, isLoading: isAuthLoading } = useAuth({
     redirectIfUnauthenticated: true,
     redirectTo: '/',
   });
@@ -89,6 +89,10 @@ export function GenealogieTreechartsClient({ initialPersons }: GenealogieTreecha
 
   useEffect(() => {
     const checkVisibility = async () => {
+      if (isAuthLoading) {
+        return;
+      }
+
       // Les administrateurs ont toujours accès à la vue
       if (isAdmin) {
         setIsAllowed(true);
@@ -114,7 +118,7 @@ export function GenealogieTreechartsClient({ initialPersons }: GenealogieTreecha
     };
 
     checkVisibility();
-  }, [isAdmin]);
+  }, [isAdmin, isAuthLoading]);
   
   // Hooks personnalisés
   const {
@@ -485,4 +489,3 @@ export function GenealogieTreechartsClient({ initialPersons }: GenealogieTreecha
     </motion.div>
   );
 }
-

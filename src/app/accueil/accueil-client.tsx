@@ -93,6 +93,8 @@ export function AccueilClient({ initialDisplayedMessages }: AccueilClientProps) 
   const canSeeCard = (cardKey: string) => {
     // Les admins voient toujours toutes les cartes
     if (user?.status === 'administrateur') return true;
+    // Eviter d'afficher une carte masquee avant le chargement de sa visibilite.
+    if (loadingVisibility && cardKey.startsWith('genealogie')) return false;
     // Pour les autres, vérifier la visibilité
     return cardVisibility[cardKey] !== false;
   };

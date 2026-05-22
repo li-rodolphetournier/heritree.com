@@ -74,7 +74,7 @@ export function GenealogieNivoClient({ initialPersons }: GenealogieNivoClientPro
     return () => observer.disconnect();
   }, []);
   
-  const { user } = useAuth({
+  const { user, isLoading: isAuthLoading } = useAuth({
     redirectIfUnauthenticated: true,
     redirectTo: '/',
   });
@@ -88,6 +88,10 @@ export function GenealogieNivoClient({ initialPersons }: GenealogieNivoClientPro
 
   useEffect(() => {
     const checkVisibility = async () => {
+      if (isAuthLoading) {
+        return;
+      }
+
       // Les administrateurs ont toujours accès à la vue
       if (isAdmin) {
         setIsAllowed(true);
@@ -113,7 +117,7 @@ export function GenealogieNivoClient({ initialPersons }: GenealogieNivoClientPro
     };
 
     checkVisibility();
-  }, [isAdmin]);
+  }, [isAdmin, isAuthLoading]);
   
   // Hooks personnalisés
   const {
